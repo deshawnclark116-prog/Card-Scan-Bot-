@@ -72,14 +72,14 @@ def make_flyer(front: Image.Image, back: Image.Image, identity: CardIdentity,
         d.text((66, 1145), "Title shortened — verify exact card in listing",
                font=_font(18), fill=GRAY)
     if asking_price is not None:
-        price_text = f"ASKING  \${asking_price:,.2f}"
+        price_text = f"ASKING  ${asking_price:,.2f}"
     elif estimate.suggested is not None:
-        price_text = f"SUGGESTED  \${estimate.suggested:,.2f}"
+        price_text = f"SUGGESTED  ${estimate.suggested:,.2f}"
     else:
         price_text = "PRICE ON REQUEST"
     d.text((66, 1182), price_text, font=_font(53, True), fill=BLUE)
     if estimate.suggested is not None:
-        d.text((68, 1256), f"Sold comps: \${estimate.low:,.2f}–\${estimate.high:,.2f}   |   n={estimate.samples}",
+        d.text((68, 1256), f"Sold comps: ${estimate.low:,.2f}–${estimate.high:,.2f}   |   n={estimate.samples}",
                font=_font(24), fill=GRAY)
     else:
         d.text((68, 1256), "No verified comparable-sales price available", font=_font(22), fill=GRAY)
