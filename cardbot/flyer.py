@@ -19,10 +19,10 @@ GRAY = (99, 111, 131)
 def _font(size: int, bold: bool = False):
     candidates = (
         ["/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
-         "/System/Library/Fonts/Supplemental/Arial Bold.ttf"]
+         "/System/Library/Fonts/Supplemental/Arial Bold.ttf", "C:\\Windows\\Fonts\\arialbd.ttf"]
         if bold else
         ["/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-         "/System/Library/Fonts/Supplemental/Arial.ttf"]
+         "/System/Library/Fonts/Supplemental/Arial.ttf", "C:\\Windows\\Fonts\\arial.ttf"]
     )
     for path in candidates:
         if Path(path).exists():
@@ -86,8 +86,10 @@ def make_flyer(front: Image.Image, back: Image.Image, identity: CardIdentity,
     d.line((66, 1335, 1130, 1335), fill=(223, 229, 238), width=3)
     seller_line = seller_line.strip()[:75] or "Message me if interested"
     d.text((68, 1361), seller_line, font=_font(30, True), fill=NAVY)
-    d.text((68, 1428), "Raw cards are not professionally graded. Confirm condition before purchasing.",
-           font=_font(17), fill=GRAY)
+    footer = ("Raw cards are not professionally graded. Confirm condition before purchasing."
+              if (identity.grade or "raw").strip().casefold() == "raw"
+              else "Verify slab label and certification; inspect card condition before purchase.")
+    d.text((68, 1428), footer, font=_font(17), fill=GRAY)
     return image
 
 
